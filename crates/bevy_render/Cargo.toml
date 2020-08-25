@@ -44,8 +44,7 @@ parking_lot = "0.10"
 bevy-glsl-to-spirv = "0.1.7"
 
 [target.'cfg(target_os = "ios")'.dependencies]
-#shaderc = { path = "/Users/mikeh/repos/shaderc-rs/shaderc-rs" }
-naga = { version = "0.2.0", features = ["glsl-new", "spirv"] }
+shaderc = { path = "/Users/mikeh/repos/shaderc-rs/shaderc-rs" }
 
 [features]
 png = ["image/png"]
