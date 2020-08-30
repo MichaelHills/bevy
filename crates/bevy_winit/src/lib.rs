@@ -4,6 +4,7 @@ mod winit_windows;
 use bevy_input::{
     keyboard::KeyboardInput,
     mouse::{MouseButtonInput, MouseMotion, MouseScrollUnit, MouseWheel},
+    touch::{TouchInput, TouchPhase}
 };
 pub use winit_config::*;
 pub use winit_windows::*;
@@ -191,6 +192,22 @@ pub fn winit_runner(mut app: App) {
                             y: p.y as f32,
                         });
                     }
+                },
+                WindowEvent::Touch(touch) => {
+                    let mut touch_input_events =
+                        app.resources.get_mut::<Events<TouchInput>>().unwrap();
+                    // TODO use convert* thing
+                    touch_input_events.send(TouchInput {
+                        phase: match touch.phase {
+                            event::TouchPhase::Started => TouchPhase::Started,
+                            event::TouchPhase::Moved => TouchPhase::Moved,
+                            event::TouchPhase::Ended => TouchPhase::Ended,
+                            event::TouchPhase::Cancelled => TouchPhase::Cancelled,
+                        },
+                        x: touch.location.x,
+                        y: touch.location.y,
+                        id: touch.id,
+                    });
                 },
                 _ => {}
             },
