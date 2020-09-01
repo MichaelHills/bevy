@@ -4,7 +4,7 @@ mod winit_windows;
 use bevy_input::{
     keyboard::KeyboardInput,
     mouse::{MouseButtonInput, MouseMotion, MouseScrollUnit, MouseWheel},
-    touch::{TouchInput, TouchPhase}
+    touch::{TouchInput, TouchPhase},
 };
 pub use winit_config::*;
 pub use winit_windows::*;
@@ -208,7 +208,7 @@ pub fn winit_runner(mut app: App) {
                         y: touch.location.y,
                         id: touch.id,
                     });
-                },
+                }
                 _ => {}
             },
             event::Event::DeviceEvent { ref event, .. } => {

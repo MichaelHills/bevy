@@ -1,8 +1,8 @@
 mod input;
 pub mod keyboard;
 pub mod mouse;
-pub mod touch;
 pub mod system;
+pub mod touch;
 
 pub use input::*;
 
@@ -39,9 +39,6 @@ impl Plugin for InputPlugin {
                 mouse_button_input_system.system(),
             )
             .init_resource::<TouchInputState>()
-            .add_system_to_stage(
-                bevy_app::stage::EVENT_UPDATE,
-                touch_input_system.system(),
-            );
+            .add_system_to_stage(bevy_app::stage::EVENT_UPDATE, touch_input_system.system());
     }
 }
